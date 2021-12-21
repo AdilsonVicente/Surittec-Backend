@@ -89,7 +89,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		RSAKey.Builder builder = new RSAKey.Builder((RSAPublicKey) keyPair().getPublic())
 				.keyUse(KeyUse.SIGNATURE)
 				.algorithm(JWSAlgorithm.RS256)
-				.keyID("algafood-key-id");
+				.keyID("surittec-key-id");
 		
 		return new JWKSet(builder.build());
 	}
