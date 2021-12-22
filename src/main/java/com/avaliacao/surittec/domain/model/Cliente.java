@@ -1,11 +1,10 @@
 package com.avaliacao.surittec.domain.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,18 +27,18 @@ public class Cliente {
 
 	@Column(nullable = false)
 	private String nome;
-	
+
 	@Column(nullable = false)
 	private String cpf;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@OneToOne
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
-	
-	 @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cliente")
-	 private Set<Telefone> telefones;
-	 
-	 @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cliente")
-	 private Set<Email> emails;
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Telefone> telefones = new ArrayList<>();
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Email> emails = new ArrayList<>();
 
 }

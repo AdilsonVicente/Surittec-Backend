@@ -33,7 +33,6 @@ public class ClienteController {
 	private CadastroClienteService cadastroClienteService;
 	
 	@Autowired
-	
 	private ClienteRepository clienteRepository;
 	
 	@Autowired

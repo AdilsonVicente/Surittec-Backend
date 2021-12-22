@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +25,8 @@ public class Telefone {
 	@Id
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
+	@ManyToOne
+    @JoinColumn(nullable = false)
     private Cliente cliente;
 
     @Column(nullable = false, unique = true)

@@ -2,7 +2,6 @@ package com.avaliacao.surittec.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,8 +21,8 @@ public class Email {
 	@Id
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
+	@ManyToOne
+    @JoinColumn(nullable = false)
     private Cliente cliente;
 
     @Column(nullable = false, unique = true)
