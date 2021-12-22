@@ -1,14 +1,5 @@
 package com.avaliacao.surittec.domain.service;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.text.MaskFormatter;
-
-import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,11 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.avaliacao.surittec.domain.exception.ClienteNaoEncontradoException;
 import com.avaliacao.surittec.domain.exception.EntidadeEmUsoException;
 import com.avaliacao.surittec.domain.model.Cliente;
-import com.avaliacao.surittec.domain.model.Email;
-import com.avaliacao.surittec.domain.model.Telefone;
-import com.avaliacao.surittec.domain.model.TipoTelefone;
 import com.avaliacao.surittec.domain.repository.ClienteRepository;
-import com.example.demo.domain.service.ValidationMessage;
 
 @Service
 public class CadastroClienteService {
