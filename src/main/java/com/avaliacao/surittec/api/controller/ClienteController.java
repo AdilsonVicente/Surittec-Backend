@@ -45,7 +45,7 @@ public class ClienteController {
 	@CheckSecurity.Clientes.Consultar
 	@GetMapping
 	public List<ClienteModel> listar(){
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+//		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 		List<Cliente> todosClientes = clienteRepository.findAll();
 		return clienteModelAssembler.toCollectModel(todosClientes);
 	}
