@@ -62,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		var enhancerChain = new TokenEnhancerChain();
+		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
 		enhancerChain.setTokenEnhancers(
 				Arrays.asList(new JwtCustomClaimsTokenEnhancer(), jwtAccessTokenConverter()));
 		
@@ -77,7 +77,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 	
 	private ApprovalStore approvalStore(TokenStore tokenStore) {
-		var approvalStore = new TokenApprovalStore();
+		TokenApprovalStore approvalStore = new TokenApprovalStore();
 		approvalStore.setTokenStore(tokenStore);
 		
 		return approvalStore;
@@ -95,7 +95,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
-		var jwtAccessTokenConverter = new JwtAccessTokenConverter();
+		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
 		jwtAccessTokenConverter.setKeyPair(keyPair());
 		
 		return jwtAccessTokenConverter;
@@ -105,14 +105,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		var keyStorePass = jwtKeyStoreProperties.getPassword();
 		var keyPairAlias = jwtKeyStoreProperties.getKeypairAlias();
 		
-		var keyStoreKeyFactory = new KeyStoreKeyFactory(
+		KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
 				jwtKeyStoreProperties.getJksLocation(), keyStorePass.toCharArray());
 		
 		return keyStoreKeyFactory.getKeyPair(keyPairAlias);
 	}
 	
 	private TokenGranter tokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
-		var pkceAuthorizationCodeTokenGranter = new PkceAuthorizationCodeTokenGranter(endpoints.getTokenServices(),
+		PkceAuthorizationCodeTokenGranter pkceAuthorizationCodeTokenGranter = new PkceAuthorizationCodeTokenGranter(endpoints.getTokenServices(),
 				endpoints.getAuthorizationCodeServices(), endpoints.getClientDetailsService(),
 				endpoints.getOAuth2RequestFactory());
 		

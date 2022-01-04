@@ -1,9 +1,7 @@
 package com.avaliacao.surittec.core.security;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.Bean;
@@ -18,38 +16,37 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
+import lombok.var;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
-	
+public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.formLogin()
-			.and()
-				.authorizeHttpRequests()
-					.antMatchers("/oauth/**").authenticated()
-			.and()
-				.csrf().disable()
+		http.formLogin()
+        .and()
+		.authorizeHttpRequests()
+			.antMatchers("/oauth/**")
+			.authenticated()
+				.and().csrf().disable()
 				.cors()
-			.and()
-				.oauth2ResourceServer().jwt()
+					.and()
+					.oauth2ResourceServer().jwt()
 					.jwtAuthenticationConverter(jwtAuthenticationConverter());
 	}
-	
+
 	private JwtAuthenticationConverter jwtAuthenticationConverter() {
 		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
 		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
-			List<String> authorities = new ArrayList<>();
-			authorities = jwt.getClaimAsStringList("authorities");
-			
+			var authorities = jwt.getClaimAsStringList("authorities");
+
 			if (authorities == null) {
 				authorities = Collections.emptyList();
 			}
-			
-			JwtGrantedAuthoritiesConverter scopesAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+
+			var scopesAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 			Collection<GrantedAuthority> grantedAuthorities = scopesAuthoritiesConverter.convert(jwt);
 			
 			grantedAuthorities.addAll(authorities.stream()
@@ -58,11 +55,12 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 			
 			return grantedAuthorities;
 		});
-		
+
 		return jwtAuthenticationConverter;
 	}
-	
+
 	@Bean
+	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}

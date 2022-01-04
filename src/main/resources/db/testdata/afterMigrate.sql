@@ -27,13 +27,13 @@ insert into permissao (id, nome, descricao) values (2, 'CONSULTAR', 'Permissão 
 
 insert into grupo (id, nome) values (1, 'Admin'), (2, 'Comum');
 
-insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (2, 2); 
+insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 2); 
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
-(1, 'Admin', 'admin@surittec.com', '123456', utc_timestamp),
-(2, 'Comum', 'comum@surittec.com', '123456', utc_timestamp);
+(1, 'admin', 'admin@surittec.com', '$2a$10$WBZWSPPeAmKLOdtF4cnMRubWaop6yviB7w97hujmKi9YvEhw3dp2W', utc_timestamp),
+(2, 'comum', 'comum@surittec.com', '$2a$10$WBZWSPPeAmKLOdtF4cnMRubWaop6yviB7w97hujmKi9YvEhw3dp2W', utc_timestamp);
 
-insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (2, 2);
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
 
 
 insert into endereco (id, cep, logradouro, bairro, cidade, uf, complemento) values (1, '86860000', 'Rua Central', 'Central', 'Apucarana', 'PR', '');

@@ -1,5 +1,6 @@
 package com.avaliacao.surittec.domain.model;
 
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +36,10 @@ public class Usuario {
 
 	@Column(nullable = false)
 	private String senha;
+	
+	@CreationTimestamp
+	@Column(nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
 	
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))

@@ -32,7 +32,7 @@ public class CadastroUsuarioService {
 	public Usuario salvar(Usuario usuario) {
 		usuarioRepository.detach(usuario);
 		
-		Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+		Optional<Usuario> usuarioExistente = usuarioRepository.findByNome(usuario.getNome());
 		
 		if (usuarioExistente.isPresent() && !usuarioExistente.get().equals(usuario)) {
 			throw new NegocioException(

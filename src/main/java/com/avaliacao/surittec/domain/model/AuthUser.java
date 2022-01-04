@@ -1,7 +1,6 @@
 package com.avaliacao.surittec.domain.model;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +16,7 @@ public class AuthUser extends User{
 	private String fullName;
 	
 	public AuthUser(Usuario usuario, Collection<? extends GrantedAuthority> authorities) {
-		super(usuario.getNome(), usuario.getSenha(), Collections.emptyList());
+		super(usuario.getNome(), usuario.getSenha(), authorities);
 		
 		this.userId = usuario.getId();
 		this.fullName = usuario.getNome();
