@@ -25,27 +25,27 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin()
-        .and()
-		.authorizeHttpRequests()
-			.antMatchers("/oauth/**")
-			.authenticated()
-				.and().csrf().disable()
-				.cors()
-					.and()
-					.oauth2ResourceServer().jwt()
-					.jwtAuthenticationConverter(jwtAuthenticationConverter());
+		http
+			.formLogin().loginPage("/login")
+			.and()
+			.authorizeRequests()
+				.antMatchers("/oauth/**").authenticated()
+			.and()
+			.csrf().disable()
+			.cors().and()
+			.oauth2ResourceServer().jwt()
+				.jwtAuthenticationConverter(jwtAuthenticationConverter());
 	}
-
+	
 	private JwtAuthenticationConverter jwtAuthenticationConverter() {
-		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+		var jwtAuthenticationConverter = new JwtAuthenticationConverter();
 		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
 			var authorities = jwt.getClaimAsStringList("authorities");
-
+			
 			if (authorities == null) {
 				authorities = Collections.emptyList();
 			}
-
+			
 			var scopesAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 			Collection<GrantedAuthority> grantedAuthorities = scopesAuthoritiesConverter.convert(jwt);
 			
@@ -55,13 +55,14 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 			
 			return grantedAuthorities;
 		});
-
+		
 		return jwtAuthenticationConverter;
 	}
-
+	
 	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
+	
 }
