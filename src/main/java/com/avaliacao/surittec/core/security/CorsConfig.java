@@ -16,10 +16,10 @@ public class CorsConfig {
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
 		config.setAllowedOrigins(Collections.singletonList("*"));
 		config.setAllowedMethods(Collections.singletonList("*"));
 		config.setAllowedHeaders(Collections.singletonList("*"));
+		config.addAllowedOriginPattern("*");
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
@@ -27,7 +27,7 @@ public class CorsConfig {
 		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>();
 		bean.setFilter(new CorsFilter(source));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-
+		
 		return bean;
 	}
 }
