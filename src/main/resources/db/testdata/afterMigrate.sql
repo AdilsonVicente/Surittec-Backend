@@ -56,3 +56,14 @@ values (
   'READ,WRITE', 'password', null, null,
   60 * 60 * 6, 60 * 24 * 60 * 60, true
 );
+
+insert into oauth_client_details (
+  client_id, resource_ids, client_secret, 
+  scope, authorized_grant_types, web_server_redirect_uri, authorities,
+  access_token_validity, refresh_token_validity, autoapprove
+)
+values (
+  'surittec', null, '$2a$10$TZErgO5Jbirt2GZh8MU/yukRgr/lIoAbL1Ea2bZRuyXOP7SrXwcDG',
+  'READ,WRITE', 'authorization_code', null, null,
+  null, null, true
+);
