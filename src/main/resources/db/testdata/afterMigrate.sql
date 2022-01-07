@@ -63,7 +63,7 @@ insert into oauth_client_details (
   access_token_validity, refresh_token_validity, autoapprove
 )
 values (
-  'surittec', null, '$2a$10$TZErgO5Jbirt2GZh8MU/yukRgr/lIoAbL1Ea2bZRuyXOP7SrXwcDG',
+  'surittec', null, '$2y$12$w3igMjsfS5XoAYuowoH3C.54vRFWlcXSHLjX7MwF990Kc2KKKh72e',
   'READ,WRITE', 'authorization_code', null, null,
   null, null, true
 );
